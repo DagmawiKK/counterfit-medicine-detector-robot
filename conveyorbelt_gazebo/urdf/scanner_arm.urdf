@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<!--
+  Clean, simple scanner arm with a downward-facing camera.
+  - Vertical pole with horizontal extension.
+  - Fixed to world (static).
+  - High-res camera sensor for Gazebo Sim (gz-sim-camera-system).
+-->
+<robot name="scanner_arm">
+
+  <!-- World link for fixed attachment -->
+  <link name="world" />
+
+  <!-- Base plate -->
+  <link name="base_plate">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="5.0" />
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.08" length="0.02" />
+      </geometry>
+      <material name="industrial_grey">
+        <color rgba="0.55 0.57 0.60 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.08" length="0.02" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Vertical pole -->
+  <link name="pole_link">
+    <inertial>
+      <origin xyz="0 0 0.45" rpy="0 0 0" />
+      <mass value="10.0" />
+      <inertia ixx="0.10" ixy="0.0" ixz="0.0" iyy="0.10" iyz="0.0" izz="0.02" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.45" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.90" />
+      </geometry>
+      <material name="industrial_grey">
+        <color rgba="0.55 0.57 0.60 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.45" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.03" length="0.90" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Horizontal arm extension -->
+  <link name="arm_link">
+    <inertial>
+      <origin xyz="0.25 0 0" rpy="0 0 0" />
+      <mass value="3.0" />
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.05" iyz="0.0" izz="0.05" />
+    </inertial>
+    <visual>
+      <origin xyz="0.25 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.50 0.05 0.05" />
+      </geometry>
+      <material name="industrial_grey">
+        <color rgba="0.55 0.57 0.60 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.25 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.50 0.05 0.05" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Camera body -->
+  <link name="camera_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="1.0" />
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.04 0.04" />
+      </geometry>
+      <material name="camera_black">
+        <color rgba="0.1 0.1 0.1 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.04 0.04" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Fixed joints -->
+  <joint name="world_to_base" type="fixed">
+    <parent link="world" />
+    <child link="base_plate" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <joint name="base_to_pole" type="fixed">
+    <parent link="base_plate" />
+    <child link="pole_link" />
+    <origin xyz="0 0 0.02" rpy="0 0 0" />
+  </joint>
+
+  <joint name="pole_to_arm" type="fixed">
+    <parent link="pole_link" />
+    <child link="arm_link" />
+    <origin xyz="0 0 0.90" rpy="0 0 0" />
+  </joint>
+
+  <joint name="arm_to_camera" type="fixed">
+    <parent link="arm_link" />
+    <child link="camera_link" />
+    <origin xyz="0.50 0 0" rpy="0 0 0" />
+  </joint>
+
+  <!-- Gazebo settings: static model -->
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+
+  <!-- PBR metallic material for industrial arm -->
+  <gazebo reference="pole_link">
+    <material>
+      <pbr>
+        <metal>
+          <albedo>0.55 0.57 0.60 1.0</albedo>
+          <metalness>1.0</metalness>
+          <roughness>0.2</roughness>
+        </metal>
+      </pbr>
+    </material>
+  </gazebo>
+
+  <gazebo reference="arm_link">
+    <material>
+      <pbr>
+        <metal>
+          <albedo>0.55 0.57 0.60 1.0</albedo>
+          <metalness>1.0</metalness>
+          <roughness>0.2</roughness>
+        </metal>
+      </pbr>
+    </material>
+  </gazebo>
+
+  <!-- Camera sensor (downward-facing). Image noise is Gaussian. -->
+  <gazebo reference="camera_link">
+    <sensor name="scanner_camera" type="camera">
+      <always_on>true</always_on>
+      <update_rate>30</update_rate>
+      <topic>/camera/raw</topic>
+      <camera>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>1920</width>
+          <height>1080</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>10.0</far>
+        </clip>
+        <noise type="gaussian">
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </camera>
+      <pose>0 0 0 0 -1.5708 0</pose>
+      <plugin name="gz::sim::systems::Camera" filename="gz-sim-camera-system" />
+    </sensor>
+  </gazebo>
+
+</robot>

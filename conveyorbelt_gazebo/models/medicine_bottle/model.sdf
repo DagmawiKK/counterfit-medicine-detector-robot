@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!--
+  Medicine bottle model (SDF).
+
+  Goals:
+  - Cylindrical glossy plastic bottle with a curved label wrapped around it.
+  - Label texture contains:
+      * GS1 DataMatrix-like code area (visual demo) with data "9885-108331"
+      * EAN-13 barcode (generated deterministically from the same ID)
+      * OCR text: "Lot: Found: AUTHENTIC" and "EXP: 2025-15"
+  - Friction mu=0.5 to reduce sliding on the conveyor.
+  - Spawnable as a standalone model.
+
+  Notes:
+  - The label is a thin cylinder slightly larger radius than the body, so the texture naturally wraps (curvature distortion).
+  - Textures are generated in `scripts/generate_textures.py` (uses Pillow only).
+-->
+<sdf version="1.6">
+  <model name="medicine_bottle">
+    <static>false</static>
+
+    <!-- One link for stability (DART-friendly); visual details are separate visuals. -->
+    <link name="bottle_link">
+      <!-- Pose is left at origin; spawn/inclusion sets world pose. -->
+
+      <inertial>
+        <!-- Approx. small plastic bottle ~ 60g -->
+        <mass>0.06</mass>
+        <inertia>
+          <ixx>1.2e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.2e-5</iyy>
+          <iyz>0</iyz>
+          <izz>2.0e-5</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Collision: simple cylinder -->
+      <collision name="bottle_collision">
+        <pose>0 0 0.035 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.020</radius>
+            <length>0.070</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>0.5</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e5</kp>
+              <kd>50</kd>
+              <max_vel>0.2</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+      <!-- Bottle body (glossy plastic) -->
+      <visual name="bottle_body_visual">
+        <pose>0 0 0.035 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.020</radius>
+            <length>0.070</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <!-- Light amber-ish plastic (industrial pharmacy look) -->
+          <ambient>0.85 0.72 0.45 1</ambient>
+          <diffuse>0.85 0.72 0.45 1</diffuse>
+          <specular>0.9 0.9 0.9 1</specular>
+          <pbr>
+            <metal>
+              <albedo>0.85 0.72 0.45 1</albedo>
+              <metalness>0.0</metalness>
+              <roughness>0.08</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Bottle cap (slightly larger, matte plastic) -->
+      <visual name="bottle_cap_visual">
+        <pose>0 0 0.075 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.021</radius>
+            <length>0.020</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+          <pbr>
+            <metal>
+              <albedo>0.95 0.95 0.95 1</albedo>
+              <metalness>0.0</metalness>
+              <roughness>0.6</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Label shell (thin cylinder, textured) -->
+      <visual name="label_visual">
+        <pose>0 0 0.038 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0208</radius>
+            <length>0.045</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <pbr>
+            <metal>
+              <!-- Matte paper label, but with a shiny "seal" region via roughness map -->
+              <albedo_map>model://medicine_bottle/materials/textures/label_albedo.png</albedo_map>
+              <roughness_map>model://medicine_bottle/materials/textures/label_roughness.png</roughness_map>
+              <metalness>0.0</metalness>
+              <roughness>0.85</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <!-- Make the label double-sided for easier viewing from any angle -->
+        <cast_shadows>false</cast_shadows>
+      </visual>
+
+      <!-- Tamper-evident holographic seal sticker (extra shiny patch; visual only) -->
+      <visual name="seal_visual">
+        <pose>0.0208 0 0.030 0 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.010</radius>
+            <length>0.0015</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.8 0.85 1.0 1</ambient>
+          <diffuse>0.8 0.85 1.0 1</diffuse>
+          <specular>1 1 1 1</specular>
+          <pbr>
+            <metal>
+              <albedo>0.8 0.85 1.0 1</albedo>
+              <metalness>0.9</metalness>
+              <roughness>0.05</roughness>
+            </metal>
+          </pbr>
+        </material>
+        <cast_shadows>false</cast_shadows>
+      </visual>
+
+    </link>
+  </model>
+</sdf>
