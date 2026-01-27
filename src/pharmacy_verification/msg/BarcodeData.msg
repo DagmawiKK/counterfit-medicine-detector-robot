@@ -1,0 +1,2 @@
+string data
+geometry_msgs/Polygon bounding_box
