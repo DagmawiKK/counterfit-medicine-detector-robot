@@ -50,6 +50,8 @@ def main():
     parser = argparse.ArgumentParser(description='Spawn object into our Gazebo world.')
     parser.add_argument('--package', type=str, default='', help='Package where URDF/XACRO file is located.')
     parser.add_argument('--urdf', type=str, default='', help='URDF of the object to spawn.')
+    parser.add_argument('--sdf', type=str, default='', help='SDF model file to spawn.')
+    parser.add_argument('--model', type=str, default='', help='Model folder name when spawning SDF.')
     parser.add_argument('--name', type=str, default='OBJECT', help='Name of the object to spawn.')
     parser.add_argument('--namespace', type=str, default='ros2Grasp', help='ROS namespace to apply to the tf and plugins.')
     parser.add_argument('--ns', type=bool, default=True, help='Whether to enable namespacing')
@@ -76,9 +78,18 @@ def main():
     request = SpawnEntity.Request()
     request.name = args.name
 
-    urdf_file_path = os.path.join(get_package_share_directory(args.package), 'urdf', args.urdf) # It is assumed that the .urdf/.xacro file is located in /urdf folder!
-    xacro_file = xacro.process_file(urdf_file_path)
-    request.xml = xacro_file.toxml() 
+    if args.sdf:
+        if not args.model:
+            raise RuntimeError('When using --sdf you must also set --model')
+        sdf_file_path = os.path.join(
+            get_package_share_directory(args.package), 'models', args.model, args.sdf
+        )
+        with open(sdf_file_path, 'r') as sdf_file:
+            request.xml = sdf_file.read()
+    else:
+        urdf_file_path = os.path.join(get_package_share_directory(args.package), 'urdf', args.urdf)
+        xacro_file = xacro.process_file(urdf_file_path)
+        request.xml = xacro_file.toxml() 
 
     request.initial_pose.position.x = float(args.x)
     request.initial_pose.position.y = float(args.y)

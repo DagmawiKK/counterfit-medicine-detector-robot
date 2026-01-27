@@ -3,20 +3,19 @@
   Medicine bottle model (SDF).
 
   Goals:
-  - Cylindrical glossy plastic bottle with a curved label wrapped around it.
+  - Cylindrical glossy plastic bottle with "Nano Banana" branding.
   - Label texture contains:
-      * GS1 DataMatrix-like code area (visual demo) with data "9885-108331"
-      * EAN-13 barcode (generated deterministically from the same ID)
-      * OCR text: "Lot: Found: AUTHENTIC" and "EXP: 2025-15"
-  - Friction mu=0.5 to reduce sliding on the conveyor.
-  - Spawnable as a standalone model.
+      * GS1 DataMatrix code with ID "NB-885-108331"
+      * EAN-13 barcode
+      * OCR text: "LOT: BAN001-GB" and "EXP: 12/2028"
+      * Manufacturer details and dosage instructions.
 
   Notes:
   - The label is a thin cylinder slightly larger radius than the body, so the texture naturally wraps (curvature distortion).
   - Textures are generated in `scripts/generate_textures.py` (uses Pillow only).
 -->
 <sdf version="1.6">
-  <model name="medicine_bottle">
+  <model name="nano_banana_bottle">
     <static>false</static>
 
     <!-- One link for stability (DART-friendly); visual details are separate visuals. -->
@@ -110,6 +109,24 @@
         </material>
       </visual>
 
+      <!-- Top label for overhead camera (flat, high-contrast) -->
+      <visual name="top_label_visual">
+        <pose>0 0 0.086 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040 0.040 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://medicine_bottle/materials/scripts</uri>
+            <uri>model://medicine_bottle/materials/textures</uri>
+            <name>MedicineBottle/TopLabel</name>
+          </script>
+        </material>
+        <cast_shadows>false</cast_shadows>
+      </visual>
+
       <!-- Label shell (thin cylinder, textured) -->
       <visual name="label_visual">
         <pose>0 0 0.038 0 0 0</pose>
@@ -120,18 +137,11 @@
           </cylinder>
         </geometry>
         <material>
-          <ambient>1 1 1 1</ambient>
-          <diffuse>1 1 1 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <pbr>
-            <metal>
-              <!-- Matte paper label, but with a shiny "seal" region via roughness map -->
-              <albedo_map>model://medicine_bottle/materials/textures/label_albedo.png</albedo_map>
-              <roughness_map>model://medicine_bottle/materials/textures/label_roughness.png</roughness_map>
-              <metalness>0.0</metalness>
-              <roughness>0.85</roughness>
-            </metal>
-          </pbr>
+          <script>
+            <uri>model://medicine_bottle/materials/scripts</uri>
+            <uri>model://medicine_bottle/materials/textures</uri>
+            <name>MedicineBottle/Label</name>
+          </script>
         </material>
         <!-- Make the label double-sided for easier viewing from any angle -->
         <cast_shadows>false</cast_shadows>

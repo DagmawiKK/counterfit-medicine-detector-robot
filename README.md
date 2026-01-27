@@ -76,6 +76,11 @@ Use the provided Python script to spawn objects (like a box) onto the belt:
 ros2 run ros2_conveyorbelt SpawnObject.py --package "conveyorbelt_gazebo" --urdf "box.urdf" --name "medicine_box" --x 0.0 --y -0.5 --z 0.76
 ```
 
+Spawn the Phillips Milk of Magnesia model (Fuel) integrated into the workspace:
+```bash
+ros2 run ros2_conveyorbelt SpawnObject.py --package "conveyorbelt_gazebo" --sdf "model.sdf" --model "phillips_milk_of_magnesia" --name "phillips_milk" --x 0.0 --y -0.5 --z 0.76
+```
+
 ## References and Acknowledgments
 
 The conveyor belt implementation in this project is based on the work by the **IFRA (Intelligent Flexible Robotics and Assembly) Group** at **Cranfield University**. We would like to acknowledge the original authors:

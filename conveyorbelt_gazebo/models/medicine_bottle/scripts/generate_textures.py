@@ -20,9 +20,10 @@ from PIL import Image, ImageDraw, ImageFont
 class LabelSpec:
     width: int = 2048
     height: int = 1024
-    id_text: str = "9885-108331"
-    ocr_line_1: str = "Lot: Found: AUTHENTIC"
-    ocr_line_2: str = "EXP: 2025-15"
+    medicine_name: str = "Nano Banana Extra Strength"
+    id_text: str = "NB-885-108331"
+    ocr_line_1: str = "LOT: BAN001-GB"
+    ocr_line_2: str = "EXP: 12/2028"
 
 
 L_CODES = {
@@ -169,6 +170,29 @@ def try_draw_real_datamatrix(img: Image.Image, x: int, y: int, size: int, payloa
     except Exception:
         return False
 
+
+def try_draw_qrcode(img: Image.Image, x: int, y: int, size: int, payload: str) -> bool:
+    try:
+        import qrcode  # type: ignore
+    except Exception:
+        return False
+
+    try:
+        qr = qrcode.QRCode(
+            version=2,
+            error_correction=qrcode.constants.ERROR_CORRECT_M,
+            box_size=10,
+            border=2,
+        )
+        qr.add_data(payload)
+        qr.make(fit=True)
+        qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+        qr_img = qr_img.resize((size, size), resample=Image.NEAREST)
+        img.paste(qr_img, (x, y))
+        return True
+    except Exception:
+        return False
+
     try:
         # pylibdmtx returns PNG bytes by default
         dm = encode(payload.encode("utf-8"), size="SquareAuto")
@@ -217,12 +241,19 @@ def main() -> None:
     barcode_w, barcode_h = 900, 220
 
     # Header band
-    draw.rectangle([0, 0, spec.width, 120], fill=(30, 45, 70))
-    font_title = load_font(54)
+    draw.rectangle([0, 0, spec.width, 120], fill=(20, 80, 50)) # Deep medicinal green
+    font_title = load_font(64)
     font_small = load_font(36)
     font_mono = load_font(32)
+    font_tiny = load_font(24)
 
-    draw.text((margin, 28), "MEDICINE BOTTLE LABEL", fill=(255, 255, 255), font=font_title)
+    draw.text((margin, 20), "NanoTech Pharma", fill=(200, 255, 200), font=font_tiny)
+    draw.text((margin, 40), spec.medicine_name, fill=(255, 255, 255), font=font_title)
+
+    # Details block
+    draw.text((margin, 130), "Dosage: 500mg | Qty: 100 Tablets", fill=(50, 50, 50), font=font_small)
+    draw.text((margin, 580), "Direction: Take one tablet daily with water.", fill=(100, 100, 100), font=font_small)
+    draw.text((margin, 620), "Warning: Keep out of reach of children.", fill=(200, 50, 50), font=font_small)
 
     # DataMatrix block
     dm_x, dm_y = margin, 170
@@ -264,6 +295,33 @@ def main() -> None:
     albedo_path = out_dir / "label_albedo.png"
     albedo.save(albedo_path)
 
+    # Top label for overhead camera (flat, high-contrast)
+    top_size = 512
+    top_label = Image.new("RGB", (top_size, top_size), (255, 255, 255))
+    tdraw = ImageDraw.Draw(top_label)
+
+    top_margin = 20
+    top_qr_size = 220
+    top_bc_w, top_bc_h = 420, 120
+
+    used_qr = try_draw_qrcode(top_label, top_margin, top_margin, top_qr_size, spec.id_text)
+    if not used_qr:
+        used_real_dm_top = try_draw_real_datamatrix(top_label, top_margin, top_margin, top_qr_size, spec.id_text)
+        if not used_real_dm_top:
+            pseudo_datamatrix(top_label, top_margin, top_margin, top_qr_size, spec.id_text)
+
+    top_bc_x = top_margin
+    top_bc_y = top_margin + top_qr_size + 20
+    draw_ean13(tdraw, top_bc_x, top_bc_y, top_bc_w, top_bc_h, d13)
+
+    top_text_y = top_bc_y + top_bc_h + 10
+    tdraw.text((top_margin, top_text_y), spec.medicine_name, fill=(0, 0, 0), font=load_font(32))
+    tdraw.text((top_margin, top_text_y + 40), spec.ocr_line_1, fill=(0, 0, 0), font=load_font(28))
+    tdraw.text((top_margin, top_text_y + 76), spec.ocr_line_2, fill=(0, 0, 0), font=load_font(28))
+
+    top_albedo_path = out_dir / "top_label_albedo.png"
+    top_label.save(top_albedo_path)
+
     # Roughness map: white=rough, black=shiny.
     rough = Image.new("L", (spec.width, spec.height), 220)  # mostly matte
     rdraw = ImageDraw.Draw(rough)
@@ -278,11 +336,19 @@ def main() -> None:
     rough_path = out_dir / "label_roughness.png"
     rough.save(rough_path)
 
+    top_rough = Image.new("L", (top_size, top_size), 220)
+    top_rough_path = out_dir / "top_label_roughness.png"
+    top_rough.save(top_rough_path)
+
     print(f"Wrote: {albedo_path}")
     print(f"Wrote: {rough_path}")
+    print(f"Wrote: {top_albedo_path}")
+    print(f"Wrote: {top_rough_path}")
     print(f"EAN-13 used: {d13}")
     if not used_real_dm:
         print("Note: pylibdmtx not found; DataMatrix is a visual demo. Install 'python3-pylibdmtx' or 'pip install pylibdmtx' for a real DataMatrix.")
+    if not used_qr:
+        print("Note: qrcode not found; top label uses DataMatrix or demo instead of QR. Install 'qrcode[pil]'.")
 
 
 if __name__ == "__main__":
