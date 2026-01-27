@@ -44,7 +44,9 @@ install(
 find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ConveyorBeltState.msg"
+  "msg/VerificationResult.msg"
   "srv/ConveyorBeltControl.srv"
+  "srv/VerifyDrug.srv"
 )
 
 ament_package()

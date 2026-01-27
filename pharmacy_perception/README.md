@@ -12,6 +12,11 @@ ROS 2 Humble perception nodes for barcode detection and OCR from the Gazebo came
   - Subscribes: `/camera/scanner_camera/image_raw`, `/barcode/bbox`
   - Publishes: `/ocr/data` (OCR text)
 
+- `verification_manager`
+  - Subscribes: `/barcode/data`, `/ocr/data`
+  - Publishes: `/verification/result` (status codes: 0 valid, 1 expired, 2 mismatch)
+  - Service: `VerifyDrug`
+
 ## Dependencies
 
 System packages:
@@ -44,6 +49,14 @@ source install/setup.bash
 ```bash
 ros2 launch pharmacy_perception perception.launch.py
 ```
+
+Run verification manager:
+
+```bash
+ros2 run pharmacy_perception verification_manager
+```
+
+Inventory file (default): `pharmacy_perception/config/inventory.json`
 
 ## Parameters
 

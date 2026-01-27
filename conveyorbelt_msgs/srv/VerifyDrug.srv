@@ -1,0 +1,6 @@
+string barcode
+string lot
+string expiry
+---
+int32 status
+string reason

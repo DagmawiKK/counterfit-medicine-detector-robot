@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "barcode": "AMX-62810001",
+      "lot": "AMX23A",
+      "expiry": "12/2026",
+      "name": "Amoxicillin 500mg"
+    },
+    {
+      "barcode": "62810001",
+      "lot": "LOT99",
+      "expiry": "01/2024",
+      "name": "Counterfeit Demo"
+    }
+  ]
+}

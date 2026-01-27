@@ -10,6 +10,7 @@ setup(
         ("share/ament_index/resource_index/packages", [f"resource/{package_name}"]),
         (f"share/{package_name}", ["package.xml", "README.md"]),
         (f"share/{package_name}/launch", ["launch/perception.launch.py"]),
+        (f"share/{package_name}/config", ["config/inventory.json"]),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
@@ -21,6 +22,7 @@ setup(
         "console_scripts": [
             "barcode_node = pharmacy_perception.barcode_node:main",
             "ocr_node = pharmacy_perception.ocr_node:main",
+            "verification_manager = pharmacy_perception.verification_manager:main",
         ],
     },
 )

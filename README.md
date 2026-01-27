@@ -81,6 +81,18 @@ Spawn the Phillips Milk of Magnesia model (Fuel) integrated into the workspace:
 ros2 run ros2_conveyorbelt SpawnObject.py --package "conveyorbelt_gazebo" --sdf "model.sdf" --model "phillips_milk_of_magnesia" --name "phillips_milk" --x 0.0 --y -0.5 --z 0.76
 ```
 
+## Verification Logic
+
+Run the verification manager (barcode + OCR sync, inventory check):
+```bash
+ros2 run pharmacy_perception verification_manager
+```
+
+Results are published to `/verification/result` with status codes:
+- `0` = Valid
+- `1` = Expired
+- `2` = Counterfeit/Mismatch
+
 ## References and Acknowledgments
 
 The conveyor belt implementation in this project is based on the work by the **IFRA (Intelligent Flexible Robotics and Assembly) Group** at **Cranfield University**. We would like to acknowledge the original authors:

@@ -20,10 +20,10 @@ from PIL import Image, ImageDraw, ImageFont
 class LabelSpec:
     width: int = 2048
     height: int = 1024
-    medicine_name: str = "Nano Banana Extra Strength"
-    id_text: str = "NB-885-108331"
-    ocr_line_1: str = "LOT: BAN001-GB"
-    ocr_line_2: str = "EXP: 12/2028"
+    medicine_name: str = "Amoxicillin 500mg"
+    id_text: str = "AMX-62810001"
+    ocr_line_1: str = "LOT: AMX23A"
+    ocr_line_2: str = "EXP: 12/2026"
 
 
 L_CODES = {
