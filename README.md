@@ -93,6 +93,16 @@ Results are published to `/verification/result` with status codes:
 - `1` = Expired
 - `2` = Counterfeit/Mismatch
 
+## Sorting Actuator
+
+Run the diverter control node to stop the belt and push invalid items:
+```bash
+ros2 launch pharmacy_perception sorting.launch.py
+```
+
+The diverter arm model is included in `conveyorbelt.world` as `model://diverter_arm`.
+Sorting uses `/gazebo/set_model_configuration`, enabled by the Gazebo ROS API plugin in the world file.
+
 ## References and Acknowledgments
 
 The conveyor belt implementation in this project is based on the work by the **IFRA (Intelligent Flexible Robotics and Assembly) Group** at **Cranfield University**. We would like to acknowledge the original authors:

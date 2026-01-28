@@ -52,6 +52,8 @@
       <shadows>0</shadows>
     </scene>
 
+    <plugin name="gazebo_ros_api" filename="libgazebo_ros_api_plugin.so" />
+
     <!-- Insert Conveyor Belt -->
     <include>
       <name>conveyor_belt</name>
@@ -64,6 +66,13 @@
       <name>scanner_arm</name>
       <pose>-0.5 0 0 0 0 0</pose>
       <uri>model://scanner_arm</uri>
+    </include>
+
+    <!-- Insert Diverter Arm for sorting -->
+    <include>
+      <name>diverter_arm</name>
+      <pose>0.35 -0.25 0.75 0 0 0</pose>
+      <uri>model://diverter_arm</uri>
     </include>
 
   </world>

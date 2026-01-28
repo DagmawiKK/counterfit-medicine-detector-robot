@@ -17,6 +17,10 @@ ROS 2 Humble perception nodes for barcode detection and OCR from the Gazebo came
   - Publishes: `/verification/result` (status codes: 0 valid, 1 expired, 2 mismatch)
   - Service: `VerifyDrug`
 
+- `sorting_actuator`
+  - Subscribes: `/verification/result`
+  - Controls: `/CONVEYORPOWER` and `/gazebo/set_model_configuration`
+
 ## Dependencies
 
 System packages:
@@ -55,6 +59,14 @@ Run verification manager:
 ```bash
 ros2 run pharmacy_perception verification_manager
 ```
+
+Run sorting actuator:
+
+```bash
+ros2 launch pharmacy_perception sorting.launch.py
+```
+
+Note: Sorting uses `/gazebo/set_model_configuration`, which requires the Gazebo ROS API plugin (enabled in `conveyorbelt.world`).
 
 Inventory file (default): `pharmacy_perception/config/inventory.json`
 

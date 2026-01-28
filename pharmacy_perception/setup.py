@@ -9,7 +9,7 @@ setup(
     data_files=[
         ("share/ament_index/resource_index/packages", [f"resource/{package_name}"]),
         (f"share/{package_name}", ["package.xml", "README.md"]),
-        (f"share/{package_name}/launch", ["launch/perception.launch.py"]),
+        (f"share/{package_name}/launch", ["launch/perception.launch.py", "launch/sorting.launch.py"]),
         (f"share/{package_name}/config", ["config/inventory.json"]),
     ],
     install_requires=["setuptools"],
@@ -23,6 +23,7 @@ setup(
             "barcode_node = pharmacy_perception.barcode_node:main",
             "ocr_node = pharmacy_perception.ocr_node:main",
             "verification_manager = pharmacy_perception.verification_manager:main",
+            "sorting_actuator = pharmacy_perception.sorting_actuator:main",
         ],
     },
 )
