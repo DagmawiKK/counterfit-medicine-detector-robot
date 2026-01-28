@@ -49,8 +49,86 @@
     </include>
 
     <scene>
-      <shadows>0</shadows>
+      <ambient>0.45 0.47 0.50 1</ambient>
+      <background>0.96 0.98 1.00 1</background>
+      <shadows>1</shadows>
     </scene>
+
+    <!-- Indoor pharmacy-style lighting (environment only) -->
+    <light name="pharmacy_overhead_fill" type="point">
+      <pose>0 0 2.9 0 0 0</pose>
+      <diffuse>0.95 0.98 1.0 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.6</constant>
+        <linear>0.02</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>true</cast_shadows>
+    </light>
+    <light name="pharmacy_panel_1" type="point">
+      <pose>-1.5 -1.5 2.9 0 0 0</pose>
+      <diffuse>0.90 0.95 1.0 1</diffuse>
+      <specular>0.15 0.15 0.15 1</specular>
+      <attenuation>
+        <range>10</range>
+        <constant>0.7</constant>
+        <linear>0.03</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+    </light>
+    <light name="pharmacy_panel_2" type="point">
+      <pose>1.5 -1.5 2.9 0 0 0</pose>
+      <diffuse>0.90 0.95 1.0 1</diffuse>
+      <specular>0.15 0.15 0.15 1</specular>
+      <attenuation>
+        <range>10</range>
+        <constant>0.7</constant>
+        <linear>0.03</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+    </light>
+    <light name="pharmacy_panel_3" type="point">
+      <pose>-1.5 1.5 2.9 0 0 0</pose>
+      <diffuse>0.90 0.95 1.0 1</diffuse>
+      <specular>0.15 0.15 0.15 1</specular>
+      <attenuation>
+        <range>10</range>
+        <constant>0.7</constant>
+        <linear>0.03</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+    </light>
+    <light name="pharmacy_panel_4" type="point">
+      <pose>1.5 1.5 2.9 0 0 0</pose>
+      <diffuse>0.90 0.95 1.0 1</diffuse>
+      <specular>0.15 0.15 0.15 1</specular>
+      <attenuation>
+        <range>10</range>
+        <constant>0.7</constant>
+        <linear>0.03</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+    </light>
+    <light name="conveyor_spot" type="spot">
+      <pose>0 0 2.8 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>0 0 -1</direction>
+      <spot>
+        <inner_angle>0.5</inner_angle>
+        <outer_angle>0.9</outer_angle>
+        <falloff>0.8</falloff>
+      </spot>
+      <attenuation>
+        <range>8</range>
+        <constant>0.7</constant>
+        <linear>0.02</linear>
+        <quadratic>0.004</quadratic>
+      </attenuation>
+      <cast_shadows>true</cast_shadows>
+    </light>
 
     <plugin name="gazebo_ros_api" filename="libgazebo_ros_api_plugin.so" />
 
@@ -59,6 +137,13 @@
       <name>conveyor_belt</name>
       <pose>0 0 0 0 0 0</pose>
       <uri>model://conveyor_belt</uri>
+    </include>
+
+    <!-- Surrounding environment only (pharmacy-style room) -->
+    <include>
+      <name>pharmacy_environment</name>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://pharmacy_environment</uri>
     </include>
 
     <!-- Insert Scanner Arm (SDF model) centered above the belt -->

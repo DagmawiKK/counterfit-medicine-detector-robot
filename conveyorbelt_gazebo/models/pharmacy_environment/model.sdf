@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="pharmacy_environment">
+    <static>true</static>
+
+    <link name="room">
+      <!-- Floor (sits flush at z=0) -->
+      <visual name="floor_visual">
+        <pose>0 0 0.001 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>8 6 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+          <pbr>
+            <metal>
+              <metalness>0.0</metalness>
+              <roughness>0.65</roughness>
+              <albedo_map>model://pharmacy_environment/materials/textures/interior_tiles_diff_1k.jpg</albedo_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Shelves with multiple levels -->
+      <!-- Shelf left 1: vertical supports -->
+      <visual name="shelf_left_1_support1">
+        <pose>-3.6 -1.2 1.0 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_1_support2">
+        <pose>-3.6 -1.2 1.0 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <!-- Shelf levels -->
+      <visual name="shelf_left_1_level1">
+        <pose>-3.6 -1.2 0.5 0 0 0</pose>
+        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.92 0.93 0.95 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <visual name="shelf_left_1_level2">
+        <pose>-3.6 -1.2 1.0 0 0 0</pose>
+        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.92 0.93 0.95 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <visual name="shelf_left_1_level3">
+        <pose>-3.6 -1.2 1.5 0 0 0</pose>
+        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.92 0.93 0.95 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <!-- Shelf dividers and items for better look -->
+      <visual name="shelf_left_1_divider1">
+        <pose>-3.6 -0.5 1.0 0 0 0</pose>
+        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_1_divider2">
+        <pose>-3.6 0.5 1.0 0 0 0</pose>
+        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_1_item1">
+        <pose>-3.6 -1.0 1.05 0 0 0</pose>
+        <geometry><box><size>0.1 0.1 0.2</size></box></geometry>
+        <material>
+          <ambient>0.7 0.8 0.9 1</ambient>
+          <diffuse>0.7 0.8 0.9 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_2_support1">
+        <pose>-3.6 1.2 1.0 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_2_support2">
+        <pose>-3.6 1.2 1.0 0 0 0</pose>
+        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <!-- Shelf levels -->
+      <visual name="shelf_left_2_level1">
+        <pose>-3.6 1.2 0.5 0 0 0</pose>
+        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.92 0.93 0.95 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <visual name="shelf_left_2_level2">
+        <pose>-3.6 1.2 1.0 0 0 0</pose>
+        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.92 0.93 0.95 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <visual name="shelf_left_2_level3">
+        <pose>-3.6 1.2 1.5 0 0 0</pose>
+        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
+        <material>
+          <ambient>0.92 0.93 0.95 1</ambient>
+          <diffuse>0.92 0.93 0.95 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <!-- Shelf dividers and items for shelf_left_2 -->
+      <visual name="shelf_left_2_divider1">
+        <pose>-3.6 0.5 1.0 0 0 0</pose>
+        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_2_divider2">
+        <pose>-3.6 1.9 1.0 0 0 0</pose>
+        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+      <visual name="shelf_left_2_item1">
+        <pose>-3.6 1.0 1.05 0 0 0</pose>
+        <geometry><cylinder><radius>0.05</radius><length>0.15</length></cylinder></geometry>
+        <material>
+          <ambient>0.6 0.8 0.6 1</ambient>
+          <diffuse>0.6 0.8 0.6 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Plant assets: potted plants -->
+      <visual name="plant_pot_1">
+        <pose>2.5 -2.5 0.15 0 0 0</pose>
+        <geometry><cylinder><radius>0.1</radius><length>0.3</length></cylinder></geometry>
+        <material>
+          <ambient>0.4 0.3 0.2 1</ambient>
+          <diffuse>0.4 0.3 0.2 1</diffuse>
+        </material>
+      </visual>
+      <visual name="plant_leaves_1">
+        <pose>2.5 -2.5 0.45 0 0 0</pose>
+        <geometry><sphere><radius>0.2</radius></sphere></geometry>
+        <material>
+          <ambient>0.2 0.5 0.2 1</ambient>
+          <diffuse>0.2 0.5 0.2 1</diffuse>
+        </material>
+      </visual>
+      <visual name="plant_pot_2">
+        <pose>-2.5 2.5 0.15 0 0 0</pose>
+        <geometry><cylinder><radius>0.1</radius><length>0.3</length></cylinder></geometry>
+        <material>
+          <ambient>0.4 0.3 0.2 1</ambient>
+          <diffuse>0.4 0.3 0.2 1</diffuse>
+        </material>
+      </visual>
+      <visual name="plant_leaves_2">
+        <pose>-2.5 2.5 0.45 0 0 0</pose>
+        <geometry><sphere><radius>0.2</radius></sphere></geometry>
+        <material>
+          <ambient>0.2 0.5 0.2 1</ambient>
+          <diffuse>0.2 0.5 0.2 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Additional assets for realism -->
+      <!-- Pharmacy counter -->
+      <visual name="counter_base">
+        <pose>0 -2.5 0.4 0 0 0</pose>
+        <geometry><box><size>2.0 0.5 0.8</size></box></geometry>
+        <material>
+          <ambient>0.7 0.6 0.5 1</ambient>
+          <diffuse>0.7 0.6 0.5 1</diffuse>
+        </material>
+      </visual>
+      <visual name="counter_top">
+        <pose>0 -2.5 0.9 0 0 0</pose>
+        <geometry><box><size>2.0 0.6 0.1</size></box></geometry>
+        <material>
+          <ambient>0.9 0.9 0.9 1</ambient>
+          <diffuse>0.9 0.9 0.9 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Chair -->
+      <visual name="chair_seat">
+        <pose>1.0 -2.0 0.4 0 0 0</pose>
+        <geometry><box><size>0.4 0.4 0.05</size></box></geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient>
+          <diffuse>0.5 0.5 0.5 1</diffuse>
+        </material>
+      </visual>
+      <visual name="chair_back">
+        <pose>1.0 -2.35 0.7 0 0 0</pose>
+        <geometry><box><size>0.4 0.05 0.4</size></box></geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient>
+          <diffuse>0.5 0.5 0.5 1</diffuse>
+        </material>
+      </visual>
+      <visual name="chair_legs">
+        <pose>1.0 -2.0 0.2 0 0 0</pose>
+        <geometry><cylinder><radius>0.02</radius><length>0.4</length></cylinder></geometry>
+        <material>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.3 0.3 0.3 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Wall clock -->
+      <visual name="wall_clock">
+        <pose>0 2.95 2.0 0 0 0</pose>
+        <geometry><cylinder><radius>0.15</radius><length>0.02</length></cylinder></geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+        </material>
+      </visual>
+      <visual name="clock_face">
+        <pose>0 2.95 2.01 0 0 0</pose>
+        <geometry><cylinder><radius>0.12</radius><length>0.01</length></cylinder></geometry>
+        <material>
+          <ambient>0.9 0.9 0.9 1</ambient>
+          <diffuse>0.9 0.9 0.9 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Poster on wall -->
+      <visual name="poster">
+        <pose>3.95 0 1.5 0 0 0</pose>
+        <geometry><box><size>0.02 1.0 0.8</size></box></geometry>
+        <material>
+          <ambient>0.8 0.9 1 1</ambient>
+          <diffuse>0.8 0.9 1 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Pharmacy cross sign (emissive) -->
+      <visual name="pharmacy_cross">
+        <pose>0 2.95 2.2 0 0 0</pose>
+        <geometry><box><size>1.0 0.02 0.35</size></box></geometry>
+        <material>
+          <ambient>0.05 0.7 0.2 1</ambient>
+          <diffuse>0.05 0.7 0.2 1</diffuse>
+          <emissive>0.05 0.7 0.2 1</emissive>
+        </material>
+      </visual>
+      <visual name="pharmacy_cross_bar">
+        <pose>0 2.95 2.2 0 0 0</pose>
+        <geometry><box><size>0.35 0.02 1.0</size></box></geometry>
+        <material>
+          <ambient>0.05 0.7 0.2 1</ambient>
+          <diffuse>0.05 0.7 0.2 1</diffuse>
+          <emissive>0.05 0.7 0.2 1</emissive>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

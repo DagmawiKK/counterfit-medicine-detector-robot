@@ -1,0 +1,7 @@
+Poly Haven (CC0) texture used:
+- interior_tiles (Diffuse 1k JPG)
+  License: CC0 (public domain)
+  Home: https://polyhaven.com/license
+  File URL: https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/interior_tiles/interior_tiles_diff_1k.jpg
+
+Downloaded via Poly Haven public API (https://api.polyhaven.com).

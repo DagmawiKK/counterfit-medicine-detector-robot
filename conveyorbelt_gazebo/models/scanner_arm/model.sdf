@@ -286,24 +286,6 @@
           <izz>0.005</izz>
         </inertia>
       </inertial>
-      <collision name="camera_collision">
-        <geometry>
-          <box>
-            <size>0.06 0.04 0.04</size>
-          </box>
-        </geometry>
-      </collision>
-      <visual name="camera_visual">
-        <geometry>
-          <box>
-            <size>0.06 0.04 0.04</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.1 0.1 0.1 1</ambient>
-          <diffuse>0.1 0.1 0.1 1</diffuse>
-        </material>
-      </visual>
 
       <!-- Camera styling: bezel + lens + status LED (visual only) -->
       <visual name="camera_bezel">
