@@ -4,295 +4,373 @@
     <static>true</static>
 
     <link name="room">
-      <!-- Floor (sits flush at z=0) -->
+      <!-- ==================== FLOOR ==================== -->
       <visual name="floor_visual">
         <pose>0 0 0.001 0 0 0</pose>
         <geometry>
-          <box>
-            <size>8 6 0.002</size>
-          </box>
+          <box><size>10 8 0.002</size></box>
         </geometry>
         <material>
-          <ambient>1 1 1 1</ambient>
-          <diffuse>1 1 1 1</diffuse>
-          <specular>0.2 0.2 0.2 1</specular>
-          <pbr>
-            <metal>
-              <metalness>0.0</metalness>
-              <roughness>0.65</roughness>
-              <albedo_map>model://pharmacy_environment/materials/textures/interior_tiles_diff_1k.jpg</albedo_map>
-            </metal>
-          </pbr>
+          <ambient>0.85 0.85 0.82 1</ambient>
+          <diffuse>0.9 0.9 0.87 1</diffuse>
+          <specular>0.3 0.3 0.3 1</specular>
+        </material>
+      </visual>
+      <!-- Floor tiles pattern -->
+      <visual name="floor_tile_line1">
+        <pose>0 -2 0.002 0 0 0</pose>
+        <geometry><box><size>10 0.02 0.001</size></box></geometry>
+        <material><ambient>0.7 0.7 0.68 1</ambient><diffuse>0.75 0.75 0.72 1</diffuse></material>
+      </visual>
+      <visual name="floor_tile_line2">
+        <pose>0 2 0.002 0 0 0</pose>
+        <geometry><box><size>10 0.02 0.001</size></box></geometry>
+        <material><ambient>0.7 0.7 0.68 1</ambient><diffuse>0.75 0.75 0.72 1</diffuse></material>
+      </visual>
+
+      <!-- ==================== WALLS ==================== -->
+      <!-- Back wall with nice color -->
+      <visual name="back_wall">
+        <pose>0 3.99 1.5 0 0 0</pose>
+        <geometry><box><size>10 0.02 3</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.92 1</ambient>
+          <diffuse>0.98 0.98 0.95 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <!-- Front wall (partial, with opening) -->
+      <visual name="front_wall_left">
+        <pose>-3.5 -3.99 1.5 0 0 0</pose>
+        <geometry><box><size>3 0.02 3</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.92 1</ambient>
+          <diffuse>0.98 0.98 0.95 1</diffuse>
+        </material>
+      </visual>
+      <visual name="front_wall_right">
+        <pose>3.5 -3.99 1.5 0 0 0</pose>
+        <geometry><box><size>3 0.02 3</size></box></geometry>
+        <material>
+          <ambient>0.95 0.95 0.92 1</ambient>
+          <diffuse>0.98 0.98 0.95 1</diffuse>
+        </material>
+      </visual>
+      <!-- Side walls -->
+      <visual name="left_wall">
+        <pose>-4.99 0 1.5 0 0 0</pose>
+        <geometry><box><size>0.02 8 3</size></box></geometry>
+        <material>
+          <ambient>0.92 0.94 0.96 1</ambient>
+          <diffuse>0.95 0.97 0.99 1</diffuse>
+        </material>
+      </visual>
+      <visual name="right_wall">
+        <pose>4.99 0 1.5 0 0 0</pose>
+        <geometry><box><size>0.02 8 3</size></box></geometry>
+        <material>
+          <ambient>0.92 0.94 0.96 1</ambient>
+          <diffuse>0.95 0.97 0.99 1</diffuse>
         </material>
       </visual>
 
-      <!-- Shelves with multiple levels -->
-      <!-- Shelf left 1: vertical supports -->
-      <visual name="shelf_left_1_support1">
-        <pose>-3.6 -1.2 1.0 0 0 0</pose>
-        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
-      </visual>
-      <visual name="shelf_left_1_support2">
-        <pose>-3.6 -1.2 1.0 0 0 0</pose>
-        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
+      <!-- ==================== MODERN PHARMACY SHELVING UNIT (Left Wall) ==================== -->
+      <!-- Main shelf frame -->
+      <visual name="shelf_unit_back">
+        <pose>-4.85 0 1.2 0 0 0</pose>
+        <geometry><box><size>0.05 4.0 2.4</size></box></geometry>
+        <material><ambient>0.85 0.85 0.85 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse><specular>0.2 0.2 0.2 1</specular></material>
       </visual>
       <!-- Shelf levels -->
-      <visual name="shelf_left_1_level1">
-        <pose>-3.6 -1.2 0.5 0 0 0</pose>
-        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
-        <material>
-          <ambient>0.92 0.93 0.95 1</ambient>
-          <diffuse>0.92 0.93 0.95 1</diffuse>
-          <specular>0.05 0.05 0.05 1</specular>
-        </material>
+      <visual name="shelf_l1">
+        <pose>-4.65 0 0.4 0 0 0</pose>
+        <geometry><box><size>0.4 4.0 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
       </visual>
-      <visual name="shelf_left_1_level2">
-        <pose>-3.6 -1.2 1.0 0 0 0</pose>
-        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
-        <material>
-          <ambient>0.92 0.93 0.95 1</ambient>
-          <diffuse>0.92 0.93 0.95 1</diffuse>
-          <specular>0.05 0.05 0.05 1</specular>
-        </material>
+      <visual name="shelf_l2">
+        <pose>-4.65 0 0.9 0 0 0</pose>
+        <geometry><box><size>0.4 4.0 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
       </visual>
-      <visual name="shelf_left_1_level3">
-        <pose>-3.6 -1.2 1.5 0 0 0</pose>
-        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
-        <material>
-          <ambient>0.92 0.93 0.95 1</ambient>
-          <diffuse>0.92 0.93 0.95 1</diffuse>
-          <specular>0.05 0.05 0.05 1</specular>
-        </material>
+      <visual name="shelf_l3">
+        <pose>-4.65 0 1.4 0 0 0</pose>
+        <geometry><box><size>0.4 4.0 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
       </visual>
-      <!-- Shelf dividers and items for better look -->
-      <visual name="shelf_left_1_divider1">
-        <pose>-3.6 -0.5 1.0 0 0 0</pose>
-        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
+      <visual name="shelf_l4">
+        <pose>-4.65 0 1.9 0 0 0</pose>
+        <geometry><box><size>0.4 4.0 0.025</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
       </visual>
-      <visual name="shelf_left_1_divider2">
-        <pose>-3.6 0.5 1.0 0 0 0</pose>
-        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
+      <!-- Vertical dividers -->
+      <visual name="shelf_div1">
+        <pose>-4.65 -1.5 1.2 0 0 0</pose>
+        <geometry><box><size>0.35 0.02 2.4</size></box></geometry>
+        <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
       </visual>
-      <visual name="shelf_left_1_item1">
-        <pose>-3.6 -1.0 1.05 0 0 0</pose>
-        <geometry><box><size>0.1 0.1 0.2</size></box></geometry>
-        <material>
-          <ambient>0.7 0.8 0.9 1</ambient>
-          <diffuse>0.7 0.8 0.9 1</diffuse>
-        </material>
+      <visual name="shelf_div2">
+        <pose>-4.65 0 1.2 0 0 0</pose>
+        <geometry><box><size>0.35 0.02 2.4</size></box></geometry>
+        <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
       </visual>
-      <visual name="shelf_left_2_support1">
-        <pose>-3.6 1.2 1.0 0 0 0</pose>
-        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
-      </visual>
-      <visual name="shelf_left_2_support2">
-        <pose>-3.6 1.2 1.0 0 0 0</pose>
-        <geometry><box><size>0.05 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
-      </visual>
-      <!-- Shelf levels -->
-      <visual name="shelf_left_2_level1">
-        <pose>-3.6 1.2 0.5 0 0 0</pose>
-        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
-        <material>
-          <ambient>0.92 0.93 0.95 1</ambient>
-          <diffuse>0.92 0.93 0.95 1</diffuse>
-          <specular>0.05 0.05 0.05 1</specular>
-        </material>
-      </visual>
-      <visual name="shelf_left_2_level2">
-        <pose>-3.6 1.2 1.0 0 0 0</pose>
-        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
-        <material>
-          <ambient>0.92 0.93 0.95 1</ambient>
-          <diffuse>0.92 0.93 0.95 1</diffuse>
-          <specular>0.05 0.05 0.05 1</specular>
-        </material>
-      </visual>
-      <visual name="shelf_left_2_level3">
-        <pose>-3.6 1.2 1.5 0 0 0</pose>
-        <geometry><box><size>0.35 2.0 0.05</size></box></geometry>
-        <material>
-          <ambient>0.92 0.93 0.95 1</ambient>
-          <diffuse>0.92 0.93 0.95 1</diffuse>
-          <specular>0.05 0.05 0.05 1</specular>
-        </material>
-      </visual>
-      <!-- Shelf dividers and items for shelf_left_2 -->
-      <visual name="shelf_left_2_divider1">
-        <pose>-3.6 0.5 1.0 0 0 0</pose>
-        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
-      </visual>
-      <visual name="shelf_left_2_divider2">
-        <pose>-3.6 1.9 1.0 0 0 0</pose>
-        <geometry><box><size>0.02 0.05 2.0</size></box></geometry>
-        <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-        </material>
-      </visual>
-      <visual name="shelf_left_2_item1">
-        <pose>-3.6 1.0 1.05 0 0 0</pose>
-        <geometry><cylinder><radius>0.05</radius><length>0.15</length></cylinder></geometry>
-        <material>
-          <ambient>0.6 0.8 0.6 1</ambient>
-          <diffuse>0.6 0.8 0.6 1</diffuse>
-        </material>
+      <visual name="shelf_div3">
+        <pose>-4.65 1.5 1.2 0 0 0</pose>
+        <geometry><box><size>0.35 0.02 2.4</size></box></geometry>
+        <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.85 0.85 0.85 1</diffuse></material>
       </visual>
 
-      <!-- Plant assets: potted plants -->
-      <visual name="plant_pot_1">
-        <pose>2.5 -2.5 0.15 0 0 0</pose>
-        <geometry><cylinder><radius>0.1</radius><length>0.3</length></cylinder></geometry>
-        <material>
-          <ambient>0.4 0.3 0.2 1</ambient>
-          <diffuse>0.4 0.3 0.2 1</diffuse>
-        </material>
+      <!-- Medicine bottles on shelves (colorful) -->
+      <visual name="med_bottle_1"><pose>-4.55 -1.0 0.48 0 0 0</pose><geometry><cylinder><radius>0.025</radius><length>0.12</length></cylinder></geometry><material><ambient>0.2 0.5 0.8 1</ambient><diffuse>0.3 0.6 0.9 1</diffuse></material></visual>
+      <visual name="med_bottle_2"><pose>-4.55 -0.9 0.48 0 0 0</pose><geometry><cylinder><radius>0.025</radius><length>0.12</length></cylinder></geometry><material><ambient>0.8 0.3 0.3 1</ambient><diffuse>0.9 0.4 0.4 1</diffuse></material></visual>
+      <visual name="med_bottle_3"><pose>-4.55 -0.8 0.48 0 0 0</pose><geometry><cylinder><radius>0.025</radius><length>0.12</length></cylinder></geometry><material><ambient>0.3 0.7 0.4 1</ambient><diffuse>0.4 0.8 0.5 1</diffuse></material></visual>
+      <visual name="med_box_1"><pose>-4.55 0.3 0.45 0 0 0</pose><geometry><box><size>0.08 0.12 0.06</size></box></geometry><material><ambient>0.9 0.85 0.7 1</ambient><diffuse>0.95 0.9 0.8 1</diffuse></material></visual>
+      <visual name="med_box_2"><pose>-4.55 0.5 0.45 0 0 0</pose><geometry><box><size>0.08 0.12 0.06</size></box></geometry><material><ambient>0.7 0.85 0.9 1</ambient><diffuse>0.8 0.9 0.95 1</diffuse></material></visual>
+      <visual name="med_bottle_4"><pose>-4.55 1.0 0.98 0 0 0</pose><geometry><cylinder><radius>0.03</radius><length>0.1</length></cylinder></geometry><material><ambient>0.6 0.4 0.7 1</ambient><diffuse>0.7 0.5 0.8 1</diffuse></material></visual>
+      <visual name="med_bottle_5"><pose>-4.55 1.1 0.98 0 0 0</pose><geometry><cylinder><radius>0.03</radius><length>0.1</length></cylinder></geometry><material><ambient>0.9 0.6 0.3 1</ambient><diffuse>0.95 0.7 0.4 1</diffuse></material></visual>
+      <visual name="med_box_3"><pose>-4.55 -0.5 1.45 0 0 0</pose><geometry><box><size>0.1 0.15 0.08</size></box></geometry><material><ambient>0.4 0.6 0.4 1</ambient><diffuse>0.5 0.7 0.5 1</diffuse></material></visual>
+
+      <!-- ==================== BACK WALL DISPLAY CABINET ==================== -->
+      <visual name="cabinet_frame">
+        <pose>0 3.85 1.2 0 0 0</pose>
+        <geometry><box><size>3.0 0.08 2.2</size></box></geometry>
+        <material><ambient>0.25 0.2 0.15 1</ambient><diffuse>0.35 0.28 0.2 1</diffuse><specular>0.4 0.4 0.4 1</specular></material>
       </visual>
-      <visual name="plant_leaves_1">
-        <pose>2.5 -2.5 0.45 0 0 0</pose>
-        <geometry><sphere><radius>0.2</radius></sphere></geometry>
-        <material>
-          <ambient>0.2 0.5 0.2 1</ambient>
-          <diffuse>0.2 0.5 0.2 1</diffuse>
-        </material>
+      <!-- Glass shelves -->
+      <visual name="cabinet_shelf1">
+        <pose>0 3.75 0.6 0 0 0</pose>
+        <geometry><box><size>2.8 0.3 0.01</size></box></geometry>
+        <material><ambient>0.7 0.8 0.85 0.5</ambient><diffuse>0.8 0.9 0.95 0.6</diffuse><specular>0.9 0.9 0.9 1</specular></material>
       </visual>
-      <visual name="plant_pot_2">
-        <pose>-2.5 2.5 0.15 0 0 0</pose>
-        <geometry><cylinder><radius>0.1</radius><length>0.3</length></cylinder></geometry>
-        <material>
-          <ambient>0.4 0.3 0.2 1</ambient>
-          <diffuse>0.4 0.3 0.2 1</diffuse>
-        </material>
+      <visual name="cabinet_shelf2">
+        <pose>0 3.75 1.1 0 0 0</pose>
+        <geometry><box><size>2.8 0.3 0.01</size></box></geometry>
+        <material><ambient>0.7 0.8 0.85 0.5</ambient><diffuse>0.8 0.9 0.95 0.6</diffuse><specular>0.9 0.9 0.9 1</specular></material>
       </visual>
-      <visual name="plant_leaves_2">
-        <pose>-2.5 2.5 0.45 0 0 0</pose>
-        <geometry><sphere><radius>0.2</radius></sphere></geometry>
-        <material>
-          <ambient>0.2 0.5 0.2 1</ambient>
-          <diffuse>0.2 0.5 0.2 1</diffuse>
-        </material>
+      <visual name="cabinet_shelf3">
+        <pose>0 3.75 1.6 0 0 0</pose>
+        <geometry><box><size>2.8 0.3 0.01</size></box></geometry>
+        <material><ambient>0.7 0.8 0.85 0.5</ambient><diffuse>0.8 0.9 0.95 0.6</diffuse><specular>0.9 0.9 0.9 1</specular></material>
+      </visual>
+      <!-- Display items -->
+      <visual name="display_1"><pose>-0.8 3.7 0.7 0 0 0</pose><geometry><box><size>0.15 0.1 0.15</size></box></geometry><material><ambient>0.9 0.2 0.2 1</ambient><diffuse>0.95 0.3 0.3 1</diffuse></material></visual>
+      <visual name="display_2"><pose>0 3.7 0.68 0 0 0</pose><geometry><cylinder><radius>0.04</radius><length>0.12</length></cylinder></geometry><material><ambient>0.2 0.6 0.9 1</ambient><diffuse>0.3 0.7 0.95 1</diffuse></material></visual>
+      <visual name="display_3"><pose>0.8 3.7 0.7 0 0 0</pose><geometry><box><size>0.12 0.08 0.18</size></box></geometry><material><ambient>0.4 0.8 0.4 1</ambient><diffuse>0.5 0.9 0.5 1</diffuse></material></visual>
+
+      <!-- ==================== PHARMACY CROSS SIGN (Glowing Green) ==================== -->
+      <visual name="cross_h">
+        <pose>0 3.97 2.5 0 0 0</pose>
+        <geometry><box><size>0.8 0.03 0.2</size></box></geometry>
+        <material><ambient>0.0 0.8 0.3 1</ambient><diffuse>0.0 0.9 0.4 1</diffuse><emissive>0.0 0.6 0.2 1</emissive></material>
+      </visual>
+      <visual name="cross_v">
+        <pose>0 3.97 2.5 0 0 0</pose>
+        <geometry><box><size>0.2 0.03 0.8</size></box></geometry>
+        <material><ambient>0.0 0.8 0.3 1</ambient><diffuse>0.0 0.9 0.4 1</diffuse><emissive>0.0 0.6 0.2 1</emissive></material>
+      </visual>
+      <visual name="cross_backing">
+        <pose>0 3.96 2.5 0 0 0</pose>
+        <geometry><box><size>1.0 0.02 1.0</size></box></geometry>
+        <material><ambient>0.95 0.95 0.95 1</ambient><diffuse>0.98 0.98 0.98 1</diffuse></material>
       </visual>
 
-      <!-- Additional assets for realism -->
-      <!-- Pharmacy counter -->
-      <visual name="counter_base">
-        <pose>0 -2.5 0.4 0 0 0</pose>
-        <geometry><box><size>2.0 0.5 0.8</size></box></geometry>
-        <material>
-          <ambient>0.7 0.6 0.5 1</ambient>
-          <diffuse>0.7 0.6 0.5 1</diffuse>
-        </material>
+      <!-- ==================== DECORATIVE POTTED PLANTS ==================== -->
+      <!-- Large floor plant 1 -->
+      <visual name="pot1_base">
+        <pose>3.5 3.0 0.15 0 0 0</pose>
+        <geometry><cylinder><radius>0.18</radius><length>0.3</length></cylinder></geometry>
+        <material><ambient>0.5 0.35 0.25 1</ambient><diffuse>0.6 0.45 0.35 1</diffuse></material>
+      </visual>
+      <visual name="pot1_rim">
+        <pose>3.5 3.0 0.32 0 0 0</pose>
+        <geometry><cylinder><radius>0.2</radius><length>0.04</length></cylinder></geometry>
+        <material><ambient>0.55 0.4 0.3 1</ambient><diffuse>0.65 0.5 0.4 1</diffuse></material>
+      </visual>
+      <visual name="pot1_soil">
+        <pose>3.5 3.0 0.28 0 0 0</pose>
+        <geometry><cylinder><radius>0.16</radius><length>0.02</length></cylinder></geometry>
+        <material><ambient>0.25 0.18 0.12 1</ambient><diffuse>0.3 0.22 0.15 1</diffuse></material>
+      </visual>
+      <visual name="plant1_trunk">
+        <pose>3.5 3.0 0.55 0 0 0</pose>
+        <geometry><cylinder><radius>0.03</radius><length>0.5</length></cylinder></geometry>
+        <material><ambient>0.35 0.25 0.15 1</ambient><diffuse>0.45 0.35 0.2 1</diffuse></material>
+      </visual>
+      <visual name="plant1_leaves1">
+        <pose>3.5 3.0 0.9 0 0 0</pose>
+        <geometry><sphere><radius>0.25</radius></sphere></geometry>
+        <material><ambient>0.15 0.45 0.2 1</ambient><diffuse>0.2 0.55 0.25 1</diffuse></material>
+      </visual>
+      <visual name="plant1_leaves2">
+        <pose>3.6 3.1 0.75 0 0 0</pose>
+        <geometry><sphere><radius>0.15</radius></sphere></geometry>
+        <material><ambient>0.2 0.5 0.25 1</ambient><diffuse>0.25 0.6 0.3 1</diffuse></material>
+      </visual>
+      <visual name="plant1_leaves3">
+        <pose>3.4 2.9 0.8 0 0 0</pose>
+        <geometry><sphere><radius>0.18</radius></sphere></geometry>
+        <material><ambient>0.18 0.48 0.22 1</ambient><diffuse>0.22 0.58 0.28 1</diffuse></material>
+      </visual>
+
+      <!-- Large floor plant 2 -->
+      <visual name="pot2_base">
+        <pose>-3.8 -3.0 0.12 0 0 0</pose>
+        <geometry><cylinder><radius>0.15</radius><length>0.24</length></cylinder></geometry>
+        <material><ambient>0.6 0.55 0.5 1</ambient><diffuse>0.7 0.65 0.6 1</diffuse></material>
+      </visual>
+      <visual name="pot2_rim">
+        <pose>-3.8 -3.0 0.26 0 0 0</pose>
+        <geometry><cylinder><radius>0.17</radius><length>0.04</length></cylinder></geometry>
+        <material><ambient>0.65 0.6 0.55 1</ambient><diffuse>0.75 0.7 0.65 1</diffuse></material>
+      </visual>
+      <visual name="plant2_trunk">
+        <pose>-3.8 -3.0 0.5 0 0 0</pose>
+        <geometry><cylinder><radius>0.025</radius><length>0.45</length></cylinder></geometry>
+        <material><ambient>0.4 0.3 0.2 1</ambient><diffuse>0.5 0.4 0.25 1</diffuse></material>
+      </visual>
+      <visual name="plant2_foliage">
+        <pose>-3.8 -3.0 0.85 0 0 0</pose>
+        <geometry><sphere><radius>0.3</radius></sphere></geometry>
+        <material><ambient>0.12 0.42 0.18 1</ambient><diffuse>0.18 0.52 0.24 1</diffuse></material>
+      </visual>
+
+      <!-- Small desk plant -->
+      <visual name="pot3">
+        <pose>1.5 -2.3 0.95 0 0 0</pose>
+        <geometry><cylinder><radius>0.06</radius><length>0.1</length></cylinder></geometry>
+        <material><ambient>0.8 0.75 0.7 1</ambient><diffuse>0.85 0.8 0.75 1</diffuse></material>
+      </visual>
+      <visual name="plant3_leaves">
+        <pose>1.5 -2.3 1.08 0 0 0</pose>
+        <geometry><sphere><radius>0.1</radius></sphere></geometry>
+        <material><ambient>0.2 0.6 0.3 1</ambient><diffuse>0.25 0.7 0.35 1</diffuse></material>
+      </visual>
+
+      <!-- ==================== MODERN RECEPTION COUNTER ==================== -->
+      <visual name="counter_main">
+        <pose>2.0 -2.8 0.45 0 0 0</pose>
+        <geometry><box><size>2.5 0.6 0.9</size></box></geometry>
+        <material><ambient>0.92 0.92 0.9 1</ambient><diffuse>0.96 0.96 0.94 1</diffuse><specular>0.2 0.2 0.2 1</specular></material>
       </visual>
       <visual name="counter_top">
-        <pose>0 -2.5 0.9 0 0 0</pose>
-        <geometry><box><size>2.0 0.6 0.1</size></box></geometry>
-        <material>
-          <ambient>0.9 0.9 0.9 1</ambient>
-          <diffuse>0.9 0.9 0.9 1</diffuse>
-        </material>
+        <pose>2.0 -2.75 0.92 0 0 0</pose>
+        <geometry><box><size>2.6 0.7 0.04</size></box></geometry>
+        <material><ambient>0.3 0.3 0.32 1</ambient><diffuse>0.35 0.35 0.37 1</diffuse><specular>0.6 0.6 0.6 1</specular></material>
+      </visual>
+      <visual name="counter_accent">
+        <pose>2.0 -2.5 0.45 0 0 0</pose>
+        <geometry><box><size>2.5 0.02 0.85</size></box></geometry>
+        <material><ambient>0.0 0.5 0.7 1</ambient><diffuse>0.0 0.6 0.8 1</diffuse></material>
+      </visual>
+      <!-- Computer monitor on counter -->
+      <visual name="monitor_stand">
+        <pose>2.5 -2.6 1.0 0 0 0</pose>
+        <geometry><cylinder><radius>0.08</radius><length>0.12</length></cylinder></geometry>
+        <material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
+      </visual>
+      <visual name="monitor_screen">
+        <pose>2.5 -2.55 1.25 -0.15 0 0</pose>
+        <geometry><box><size>0.5 0.02 0.35</size></box></geometry>
+        <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.15 0.15 0.15 1</diffuse><specular>0.8 0.8 0.8 1</specular></material>
+      </visual>
+      <visual name="monitor_display">
+        <pose>2.5 -2.54 1.25 -0.15 0 0</pose>
+        <geometry><box><size>0.46 0.01 0.31</size></box></geometry>
+        <material><ambient>0.2 0.4 0.6 1</ambient><diffuse>0.3 0.5 0.7 1</diffuse><emissive>0.1 0.2 0.3 1</emissive></material>
       </visual>
 
-      <!-- Chair -->
+      <!-- ==================== OFFICE CHAIR ==================== -->
+      <visual name="chair_base">
+        <pose>2.5 -2.0 0.05 0 0 0</pose>
+        <geometry><cylinder><radius>0.25</radius><length>0.05</length></cylinder></geometry>
+        <material><ambient>0.2 0.2 0.2 1</ambient><diffuse>0.25 0.25 0.25 1</diffuse></material>
+      </visual>
+      <visual name="chair_pole">
+        <pose>2.5 -2.0 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.03</radius><length>0.35</length></cylinder></geometry>
+        <material><ambient>0.6 0.6 0.62 1</ambient><diffuse>0.7 0.7 0.72 1</diffuse><specular>0.5 0.5 0.5 1</specular></material>
+      </visual>
       <visual name="chair_seat">
-        <pose>1.0 -2.0 0.4 0 0 0</pose>
-        <geometry><box><size>0.4 0.4 0.05</size></box></geometry>
-        <material>
-          <ambient>0.5 0.5 0.5 1</ambient>
-          <diffuse>0.5 0.5 0.5 1</diffuse>
-        </material>
+        <pose>2.5 -2.0 0.48 0 0 0</pose>
+        <geometry><box><size>0.45 0.45 0.08</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient><diffuse>0.2 0.2 0.25 1</diffuse></material>
       </visual>
       <visual name="chair_back">
-        <pose>1.0 -2.35 0.7 0 0 0</pose>
-        <geometry><box><size>0.4 0.05 0.4</size></box></geometry>
-        <material>
-          <ambient>0.5 0.5 0.5 1</ambient>
-          <diffuse>0.5 0.5 0.5 1</diffuse>
-        </material>
-      </visual>
-      <visual name="chair_legs">
-        <pose>1.0 -2.0 0.2 0 0 0</pose>
-        <geometry><cylinder><radius>0.02</radius><length>0.4</length></cylinder></geometry>
-        <material>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.3 0.3 0.3 1</diffuse>
-        </material>
+        <pose>2.5 -2.22 0.75 0.1 0 0</pose>
+        <geometry><box><size>0.42 0.05 0.5</size></box></geometry>
+        <material><ambient>0.15 0.15 0.18 1</ambient><diffuse>0.2 0.2 0.25 1</diffuse></material>
       </visual>
 
-      <!-- Wall clock -->
-      <visual name="wall_clock">
-        <pose>0 2.95 2.0 0 0 0</pose>
-        <geometry><cylinder><radius>0.15</radius><length>0.02</length></cylinder></geometry>
-        <material>
-          <ambient>1 1 1 1</ambient>
-          <diffuse>1 1 1 1</diffuse>
-        </material>
+      <!-- ==================== WALL CLOCK ==================== -->
+      <visual name="clock_body">
+        <pose>-2.0 3.97 2.2 1.5708 0 0</pose>
+        <geometry><cylinder><radius>0.2</radius><length>0.04</length></cylinder></geometry>
+        <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.95 0.95 0.95 1</diffuse><specular>0.3 0.3 0.3 1</specular></material>
       </visual>
       <visual name="clock_face">
-        <pose>0 2.95 2.01 0 0 0</pose>
-        <geometry><cylinder><radius>0.12</radius><length>0.01</length></cylinder></geometry>
-        <material>
-          <ambient>0.9 0.9 0.9 1</ambient>
-          <diffuse>0.9 0.9 0.9 1</diffuse>
-        </material>
+        <pose>-2.0 3.96 2.2 1.5708 0 0</pose>
+        <geometry><cylinder><radius>0.18</radius><length>0.01</length></cylinder></geometry>
+        <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+      </visual>
+      <visual name="clock_frame">
+        <pose>-2.0 3.97 2.2 1.5708 0 0</pose>
+        <geometry><cylinder><radius>0.21</radius><length>0.05</length></cylinder></geometry>
+        <material><ambient>0.3 0.3 0.32 1</ambient><diffuse>0.4 0.4 0.42 1</diffuse></material>
       </visual>
 
-      <!-- Poster on wall -->
-      <visual name="poster">
-        <pose>3.95 0 1.5 0 0 0</pose>
-        <geometry><box><size>0.02 1.0 0.8</size></box></geometry>
-        <material>
-          <ambient>0.8 0.9 1 1</ambient>
-          <diffuse>0.8 0.9 1 1</diffuse>
-        </material>
+      <!-- ==================== INFORMATIONAL POSTERS ==================== -->
+      <visual name="poster1_frame">
+        <pose>4.97 1.0 1.5 0 0 1.5708</pose>
+        <geometry><box><size>0.02 0.6 0.8</size></box></geometry>
+        <material><ambient>0.25 0.2 0.15 1</ambient><diffuse>0.35 0.28 0.2 1</diffuse></material>
+      </visual>
+      <visual name="poster1">
+        <pose>4.96 1.0 1.5 0 0 1.5708</pose>
+        <geometry><box><size>0.01 0.55 0.75</size></box></geometry>
+        <material><ambient>0.85 0.9 0.95 1</ambient><diffuse>0.9 0.95 1.0 1</diffuse></material>
+      </visual>
+      <visual name="poster2_frame">
+        <pose>4.97 -1.0 1.5 0 0 1.5708</pose>
+        <geometry><box><size>0.02 0.6 0.8</size></box></geometry>
+        <material><ambient>0.25 0.2 0.15 1</ambient><diffuse>0.35 0.28 0.2 1</diffuse></material>
+      </visual>
+      <visual name="poster2">
+        <pose>4.96 -1.0 1.5 0 0 1.5708</pose>
+        <geometry><box><size>0.01 0.55 0.75</size></box></geometry>
+        <material><ambient>0.95 0.9 0.85 1</ambient><diffuse>1.0 0.95 0.9 1</diffuse></material>
       </visual>
 
-      <!-- Pharmacy cross sign (emissive) -->
-      <visual name="pharmacy_cross">
-        <pose>0 2.95 2.2 0 0 0</pose>
-        <geometry><box><size>1.0 0.02 0.35</size></box></geometry>
-        <material>
-          <ambient>0.05 0.7 0.2 1</ambient>
-          <diffuse>0.05 0.7 0.2 1</diffuse>
-          <emissive>0.05 0.7 0.2 1</emissive>
-        </material>
+      <!-- ==================== CEILING LIGHTS ==================== -->
+      <visual name="light_fixture1">
+        <pose>-2 0 2.95 0 0 0</pose>
+        <geometry><box><size>1.2 0.15 0.05</size></box></geometry>
+        <material><ambient>0.9 0.9 0.92 1</ambient><diffuse>0.95 0.95 0.97 1</diffuse><emissive>0.8 0.8 0.85 1</emissive></material>
       </visual>
-      <visual name="pharmacy_cross_bar">
-        <pose>0 2.95 2.2 0 0 0</pose>
-        <geometry><box><size>0.35 0.02 1.0</size></box></geometry>
-        <material>
-          <ambient>0.05 0.7 0.2 1</ambient>
-          <diffuse>0.05 0.7 0.2 1</diffuse>
-          <emissive>0.05 0.7 0.2 1</emissive>
-        </material>
+      <visual name="light_fixture2">
+        <pose>2 0 2.95 0 0 0</pose>
+        <geometry><box><size>1.2 0.15 0.05</size></box></geometry>
+        <material><ambient>0.9 0.9 0.92 1</ambient><diffuse>0.95 0.95 0.97 1</diffuse><emissive>0.8 0.8 0.85 1</emissive></material>
       </visual>
+
+      <!-- ==================== EXIT SIGN ==================== -->
+      <visual name="exit_sign">
+        <pose>0 -3.97 2.6 0 0 0</pose>
+        <geometry><box><size>0.4 0.02 0.15</size></box></geometry>
+        <material><ambient>0.8 0.2 0.2 1</ambient><diffuse>0.9 0.3 0.3 1</diffuse><emissive>0.5 0.1 0.1 1</emissive></material>
+      </visual>
+
+      <!-- ==================== SAFETY EQUIPMENT ==================== -->
+      <!-- Fire extinguisher -->
+      <visual name="extinguisher_body">
+        <pose>4.8 -2.5 0.35 0 0 0</pose>
+        <geometry><cylinder><radius>0.08</radius><length>0.5</length></cylinder></geometry>
+        <material><ambient>0.8 0.1 0.1 1</ambient><diffuse>0.9 0.15 0.15 1</diffuse></material>
+      </visual>
+      <visual name="extinguisher_top">
+        <pose>4.8 -2.5 0.65 0 0 0</pose>
+        <geometry><cylinder><radius>0.03</radius><length>0.1</length></cylinder></geometry>
+        <material><ambient>0.2 0.2 0.2 1</ambient><diffuse>0.25 0.25 0.25 1</diffuse></material>
+      </visual>
+
     </link>
   </model>
 </sdf>

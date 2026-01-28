@@ -93,15 +93,54 @@ Results are published to `/verification/result` with status codes:
 - `1` = Expired
 - `2` = Counterfeit/Mismatch
 
-## Sorting Actuator
+## Sorting Robot Arm System
 
-Run the diverter control node to stop the belt and push invalid items:
+The system features a 4-DOF industrial robotic arm with a parallel gripper that picks up medicine bottles from the conveyor belt and places them into designated sorting bins based on verification results.
+
+### Sorting Bins
+
+Three color-coded bins are positioned next to the conveyor:
+
+| Status | Classification | Bin Color | Description |
+|--------|---------------|-----------|-------------|
+| 0 | Valid | **Green** | Approved medicines ready for distribution |
+| 1 | Expired | **Yellow** | Expired medicines requiring proper disposal |
+| 2 | Counterfeit | **Red** | Suspicious/counterfeit medicines for quarantine |
+
+### Robot Arm Specifications
+
+- **Type**: 4-DOF articulated arm with parallel jaw gripper
+- **Joints**:
+  - Joint 1: Base rotation (360°)
+  - Joint 2: Shoulder pitch (±90°)
+  - Joint 3: Elbow pitch (±135°)
+  - Joint 4: Wrist rotation (360°)
+  - Gripper: Parallel jaw with rubber grip pads
+
+### Running the Sorting System
+
+Launch the sorting actuator node:
 ```bash
 ros2 launch pharmacy_perception sorting.launch.py
 ```
 
-The diverter arm model is included in `conveyorbelt.world` as `model://diverter_arm`.
-Sorting uses `/gazebo/set_model_configuration`, enabled by the Gazebo ROS API plugin in the world file.
+The robot arm automatically:
+1. Stops the conveyor belt when a verification result is received
+2. Moves to the pickup position above the bottle
+3. Grasps the bottle with the gripper
+4. Moves to the appropriate bin based on classification
+5. Releases the bottle into the bin
+6. Returns to home position
+7. Resumes the conveyor belt
+
+### Configuration Parameters
+
+The sorting actuator accepts the following parameters:
+- `robot_model_name`: Name of the robot arm model (default: `sorting_robot_arm`)
+- `resume_power`: Conveyor belt power after sorting (default: `50.0`)
+- `cooldown_seconds`: Minimum time between sorting operations (default: `5.0`)
+- `motion_delay`: Delay between arm movements in seconds (default: `0.8`)
+- `gripper_delay`: Delay for gripper open/close operations (default: `0.5`)
 
 ## References and Acknowledgments
 

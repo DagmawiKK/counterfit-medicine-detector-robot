@@ -130,7 +130,22 @@
       <cast_shadows>true</cast_shadows>
     </light>
 
-    <plugin name="gazebo_ros_api" filename="libgazebo_ros_api_plugin.so" />
+    <!-- Gazebo ROS plugins for ROS2 integration -->
+    <plugin name="gazebo_ros_init" filename="libgazebo_ros_init.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+    </plugin>
+    <plugin name="gazebo_ros_factory" filename="libgazebo_ros_factory.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+    </plugin>
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+    </plugin>
 
     <!-- Insert Conveyor Belt -->
     <include>
@@ -153,12 +168,114 @@
       <uri>model://scanner_arm</uri>
     </include>
 
-    <!-- Insert Diverter Arm for sorting -->
+    <!-- ==================== SORTING ROBOT ARM ==================== -->
+    <!-- 4-DOF robotic arm for pick-and-place medicine sorting -->
     <include>
-      <name>diverter_arm</name>
-      <pose>0.35 -0.25 0.75 0 0 0</pose>
-      <uri>model://diverter_arm</uri>
+      <name>sorting_robot_arm</name>
+      <pose>0.5 -0.35 0.75 0 0 1.5708</pose>
+      <uri>model://sorting_robot_arm</uri>
     </include>
+
+    <!-- ==================== SORTING BINS ==================== -->
+    <!-- Green bin for VALID medicine (status=0) -->
+    <include>
+      <name>bin_valid</name>
+      <pose>0.85 0.30 0.75 0 0 0</pose>
+      <uri>model://sorting_bin_valid</uri>
+    </include>
+
+    <!-- Yellow bin for EXPIRED medicine (status=1) -->
+    <include>
+      <name>bin_expired</name>
+      <pose>0.85 0.0 0.75 0 0 0</pose>
+      <uri>model://sorting_bin_expired</uri>
+    </include>
+
+    <!-- Red bin for COUNTERFEIT medicine (status=2) -->
+    <include>
+      <name>bin_counterfeit</name>
+      <pose>0.85 -0.30 0.75 0 0 0</pose>
+      <uri>model://sorting_bin_counterfeit</uri>
+    </include>
+
+    <!-- Bin Stand/Table for elevated bins -->
+    <model name="bin_stand">
+      <static>true</static>
+      <pose>0.85 0.0 0.375 0 0 0</pose>
+      <link name="stand_link">
+        <collision name="stand_collision">
+          <geometry>
+            <box><size>0.50 0.90 0.75</size></box>
+          </geometry>
+        </collision>
+        <visual name="stand_visual">
+          <geometry>
+            <box><size>0.50 0.90 0.75</size></box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.62 1</ambient>
+            <diffuse>0.75 0.75 0.78 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+          </material>
+        </visual>
+        <!-- Industrial table legs -->
+        <visual name="leg_fl">
+          <pose>0.22 0.42 -0.30 0 0 0</pose>
+          <geometry><cylinder><radius>0.025</radius><length>0.15</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material>
+        </visual>
+        <visual name="leg_fr">
+          <pose>0.22 -0.42 -0.30 0 0 0</pose>
+          <geometry><cylinder><radius>0.025</radius><length>0.15</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material>
+        </visual>
+        <visual name="leg_bl">
+          <pose>-0.22 0.42 -0.30 0 0 0</pose>
+          <geometry><cylinder><radius>0.025</radius><length>0.15</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material>
+        </visual>
+        <visual name="leg_br">
+          <pose>-0.22 -0.42 -0.30 0 0 0</pose>
+          <geometry><cylinder><radius>0.025</radius><length>0.15</length></cylinder></geometry>
+          <material><ambient>0.3 0.3 0.3 1</ambient><diffuse>0.4 0.4 0.4 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Robot Arm Pedestal -->
+    <model name="robot_pedestal">
+      <static>true</static>
+      <pose>0.5 -0.35 0.375 0 0 0</pose>
+      <link name="pedestal_link">
+        <collision name="pedestal_collision">
+          <geometry>
+            <cylinder><radius>0.18</radius><length>0.75</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="pedestal_visual">
+          <geometry>
+            <cylinder><radius>0.18</radius><length>0.75</length></cylinder>
+          </geometry>
+          <material>
+            <ambient>0.4 0.42 0.45 1</ambient>
+            <diffuse>0.5 0.52 0.55 1</diffuse>
+            <specular>0.4 0.4 0.4 1</specular>
+          </material>
+        </visual>
+        <!-- Top mounting plate -->
+        <visual name="mounting_plate">
+          <pose>0 0 0.38 0 0 0</pose>
+          <geometry>
+            <cylinder><radius>0.20</radius><length>0.02</length></cylinder>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.6 0.6 0.6 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
 
   </world>
 
